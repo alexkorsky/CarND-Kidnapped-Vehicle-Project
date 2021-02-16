@@ -10,6 +10,17 @@ using nlohmann::json;
 using std::string;
 using std::vector;
 
+
+using namespace std;
+
+std::string get_current_dir() {
+   char buff[FILENAME_MAX]; //create string buffer to hold path
+   getcwd( buff, FILENAME_MAX );
+   string current_working_dir(buff);
+   return current_working_dir;
+}
+
+
 // Checks if the SocketIO event has JSON data.
 // If there is data the JSON object in string format will be returned,
 // else the empty string "" will be returned.
@@ -39,9 +50,18 @@ int main() {
 
   // Read map data
   Map map;
-  if (!read_map_data("../data/map_data.txt", map)) {
-    std::cout << "Error: Could not open map file" << std::endl;
-    return -1;
+
+  //std::cout << "Current path is " << get_current_dir()  << '\n';
+  //if (!read_map_data("/home/alex/Projects/EKF/CarND-Kidnapped-Vehicle-Project/data/map_data.txt", map))
+
+  // current dir chanegs when running from inside Eclipse
+  if (!read_map_data("../data/map_data.txt", map))
+  {
+	  if (!read_map_data("./data/map_data.txt", map))
+	  {
+		  std::cout << "Error: Could not open map file" << std::endl;
+		  return -1;
+	  }
   }
 
   // Create particle filter
