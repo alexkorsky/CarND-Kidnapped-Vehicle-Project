@@ -67,7 +67,7 @@ void ParticleFilter::prediction(double delta_t, double std_pos[],
    *  http://www.cplusplus.com/reference/random/default_random_engine/
    */
 
-	// For each particle w predict its position after delta_t time given the particle's
+	// For each particle we predict its position after delta_t time given the particle's
 	// current position and velocity vector and some noise
 
     //Normal distributions for sensor noise
